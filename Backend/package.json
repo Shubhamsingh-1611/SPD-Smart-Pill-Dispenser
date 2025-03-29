@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "SPD-Prototpe",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shubhamsingh-1611/SPD-Smart-Pill-Dispenser.git"
+  },
+  "author": "Shubham Kumar Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shubhamsingh-1611/SPD-Smart-Pill-Dispenser/issues"
+  },
+  "homepage": "https://github.com/Shubhamsingh-1611/SPD-Smart-Pill-Dispenser#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.13.1"
+  }
+}
