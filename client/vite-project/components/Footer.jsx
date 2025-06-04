@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link,NavLink} from "react-router-dom"
-
+import logo from "../assets/s.png"
 function Footer() {
   return (
     <footer className="bg-blue-50 py-12 mt-8">
@@ -9,8 +9,8 @@ function Footer() {
           <div className="mb-8 md:mb-0">
             {/* Logo */}
             <img
-              className="h-10 w-auto"
-              src="your-logo.svg" // Replace with your logo SVG or image
+              className="h-[100px] w-[100px]"
+              src={logo} // Replace with your logo SVG or image
               alt="SPD Logo"
             />
             <p className="mt-4 text-base text-gray-500">

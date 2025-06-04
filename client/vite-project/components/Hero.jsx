@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
-    <div className="bg-blue-50 py-24">
+    <div className="bg-blue-50 py-24" >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           {/* Hero Title */}

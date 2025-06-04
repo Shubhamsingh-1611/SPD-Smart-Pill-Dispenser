@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import logo from "../assets/s.png"
 function Navbar() {
   return (
-    <nav className="bg-white shadow-md fixed w-full z-10">
+    <nav className="bg-white shadow-md fixed w-full z-10 top-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
               <img
-                className="h-8 w-auto"
-                src="your-logo.svg" // Replace with your logo SVG or image
+                className="h-[100px] w-[100px]"
+                src={logo}// Replace with your logo SVG or image
                 alt="SPD Logo"
               />
             </Link>

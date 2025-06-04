@@ -3,8 +3,7 @@ import Hero from '../components/Hero.jsx'
 
 function HomePage() {
   return (
-    <div>
-      <h1>Home Page</h1>
+    <div className='mt-[60px]' >
 
     <Hero/>
     </div>

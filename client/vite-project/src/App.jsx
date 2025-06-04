@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import RegistrationForm from '../pages/RegistrationFrom.jsx';
-import PatientDashboard from '../pages/PatientDashboard.jsx';
-import DoctorDashboard from '../pages/DoctorDashboard.jsx';
-import CaregiverDashboard from '../pages/CaregiverDashboard.jsx';
+import { ToastContainer, toast } from 'react-toastify';
+import PatientRegistrationFrom from '../pages/PatientRegistrationForm.jsx';
+import Login from '../pages/Login.jsx';
 import HomePage from '../pages/HomePage.jsx';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx'
+import PatientSchedulePage from '../pages/PatientSchedulePage.jsx';
+import AddMedicineScheduleForm from '../pages/AddMedicineScheduleForm.jsx';
+import UserDashboard from '../pages/UserDashboard.jsx';
+import PrescriptionInput from '../pages/PrescriptionInput.jsx';
 
 function App() {
   return (
@@ -14,13 +17,16 @@ function App() {
         <Navbar/>
       <Routes>
         <Route path="/" element={<HomePage />} /> {/* Home page */}
-        <Route path="/register" element={<RegistrationForm />} /> {/* Registration */}
-        <Route path="/patient-dashboard" element={<PatientDashboard />} /> {/* Patient dashboard */}
-        <Route path="/doctor-dashboard" element={<DoctorDashboard />} /> {/* Doctor dashboard */}
-        <Route path="/caregiver-dashboard" element={<CaregiverDashboard />} /> {/* Caregiver dashboard */}
+        <Route path="/register" element={<PatientRegistrationFrom />} /> {/* Registration */}
+        <Route path="/login" element={<Login />} /> {/* Patient dashboard */}
+        <Route path="/schedule" element={<PatientSchedulePage />} />
+        <Route path="/precription" element={<PrescriptionInput />} /> {/* Patient schedule page */}
+        <Route path="/userDashboard" element={<UserDashboard />} /> {/* User dashboard */}
+        <Route path="/addMedicineSchedule" element={<AddMedicineScheduleForm />} /> {/* Add medicine schedule */}
         {/* Add more routes as needed */}
       </Routes>
       <Footer/>
+
     </Router>
   );
 }
