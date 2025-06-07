@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'; // Import bcrypt library
 import Patient from '../models/patientModel.js';
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
+
   
 
 
@@ -70,7 +71,7 @@ const registerPatient = asyncHandler(async (req, res) => {
 
 // @desc    Authenticate a patient and set cookie
 // @route   POST /api/patients/login
-// @access  Public
+
 const loginPatient = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -79,15 +80,25 @@ const loginPatient = asyncHandler(async (req, res) => {
   // Verify password using bcrypt
   if (patient && (await bcrypt.compare(password, patient.password))) {
     const token = generateToken(patient._id);
+      
 
+    res.cookie('jwt_token', token, {
+  httpOnly: true,
+  secure: false,
+  sameSite: 'strict',
+  path: '/',
+  expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+});
+// console.log(res.cookies.token);
     // Set JWT in an HTTP-only cookie
-    res.cookie('jwt', token, {
-      httpOnly: true, // Prevent client-side access
-      secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Expires in 30 days
-    });
+    // res.cookie('jwt', token,{
+    //   httpOnly: true, // Prevents JavaScript access to the cookie
+    //   secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    //   sameSite: 'Strict', // Helps prevent CSRF attacks
+    //   maxAge: 30 * 24 * 60 * 60 * 1000, // Cookie expiration time (30 days)
+    // });
 
-    res.json({
+    return res.json({
       _id: patient._id,
       firstName: patient.firstName,
       lastName: patient.lastName,
@@ -99,82 +110,40 @@ const loginPatient = asyncHandler(async (req, res) => {
       token:token,
     });
   } else {
-    res.status(401).json({message:"Inavlid email or Password"});
-    throw new Error('Invalid email or password');
+    return res.status(401).json({message:"Inavlid email or Password"});
+    // throw new Error('Invalid email or password');
   }
 });
 
-// @desc    Logout patient and clear cookie
-// @route   POST /api/patients/logout
-// @access  Private
+
 const logoutPatient = asyncHandler(async (req, res) => {
-  // Clear the JWT cookie
-  res.clearCookie('jwt', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-  });
-  res.status(200).json({ message: 'Logged out successfully' });
+ 
+
+
+//   res.clearCookie('jwt_token', {
+//   httpOnly: true,
+//   secure: false,
+//   sameSite: 'strict',
+//   path: '/',
+// });
+console.log("cleared cookie");
+ console.log(req.cookies.jwt_token);
+
+ res.clearCookie('jwt_token', {
+  httpOnly: true,
+  secure: false, // Set to true in production
+  sameSite: 'strict',
+ });
+
+  
+
+ return res.status(200).json({ message: 'Logged out successfully' });
+  
 });
-
-// @desc    Get patient profile
-// @route   GET /api/patients/profile
-// @access  Private
-const getPatientProfile = asyncHandler(async (req, res) => {
-  const patient = await Patient.findById(req.patient._id);
-
-  if (patient) {
-    res.json({
-      _id: patient._id,
-      firstName: patient.firstName,
-      lastName: patient.lastName,
-      email: patient.email,
-      phone: patient.phone,
-      address: patient.address,
-      dateOfBirth: patient.dateOfBirth,
-      medicalHistory: patient.medicalHistory,
-    });
-  } else {
-    res.status(404);
-    throw new Error('Patient not found');
-  }
-});
-
-
-
-// Controller function to get medicine schedules for a specific patient
-const getMedicineSchedule = asyncHandler(async (req, res) => {
-  const patientId = req.params.id;
-
-  try {
-    // Find the patient by ID and populate the medicineSchedules field
-    const patient = await Patient.findById(patientId).populate('medicineSchedules');
-
-    if (!patient) {
-      res.status(404);
-      throw new Error('Patient not found');
-    }
-
-    // Send the populated medicineSchedules back in the response
-    res.status(200).json({
-      success: true,
-      medicineSchedules: patient.medicineSchedules,
-    });
-  } catch (error) {
-    res.status(500);
-    throw new Error(`Error retrieving medicine schedules: ${error.message}`);
-  }
-});
-
-export default getMedicineSchedule;
-
-// Middleware to protect routes
 
 
 export {
   registerPatient,
   loginPatient,
   logoutPatient, // Added logout functionality
-  getPatientProfile,
-  getMedicineSchedule
-  // Added middleware for protected routes
 };

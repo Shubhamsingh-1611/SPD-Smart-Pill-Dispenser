@@ -1,6 +1,22 @@
+import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function UserDashboard() {
+  const navigate = useNavigate();
+
+  const handleClick = async() => {
+    localStorage.removeItem("token");
+    const res = await axios.post('http://localhost:3000/api/patients/logout', {}, {
+  withCredentials: true // <--- this is important
+});
+
+    // console.log(res);to
+    toast.success(res.data.message); // Show success message
+    navigate('/login'); // Redirect to the login page after logout
+
+  }
   const user = {
     name: "John Doe",
     prescriptions: [
@@ -28,6 +44,9 @@ export default function UserDashboard() {
         <h1 className="text-3xl font-bold text-center text-blue-700 mb-6">
           Welcome, {user.name}
         </h1>
+        <button onClick={handleClick} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+          logout
+        </button>
 
         <div className="grid gap-6">
           {user.prescriptions.map((med, index) => (

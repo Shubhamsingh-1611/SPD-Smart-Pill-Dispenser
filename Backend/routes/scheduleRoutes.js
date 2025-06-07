@@ -8,8 +8,8 @@ import {
 import protect from '../middleware/authMiddleware.js';
 const router = expess.Router();
 
-router.get('/:id', protect, getSchedule);
-router.post('/:id', protect, addSchedule); 
+router.get('/get', protect, getSchedule);
+router.post('/', protect, addSchedule); 
 router.put('/:id', protect, updateSchedule);
 router.delete('/:id', protect, deleteSchedule);
 

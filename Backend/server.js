@@ -1,7 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
-
+import cookieParser from "cookie-parser";
 
 
 import connectDb from "./DB/Db.js";
@@ -11,17 +11,20 @@ const app = express();
 dotenv.config();
 
 
-app.use(
+
+// Middleware to parse cookies
+app.use(express.json());
+  app.use(cookieParser()); 
+  app.use(
     cors({
       origin: 'http://localhost:5173', // Frontend origin
       credentials: true,              // Allow cookies/auth headers
     })
   );
-  
-app.use(express.json());
 //routing for the user
 app.use("/api/patients",patientRoutes);
 app.use("/api/patients/schedule",scheuleRoutes);
+
 
 app.get("/",(req,res)=>{
     res.send("Server Ready")

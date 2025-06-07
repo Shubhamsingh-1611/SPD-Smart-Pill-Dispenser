@@ -10,6 +10,7 @@ import PatientSchedulePage from '../pages/PatientSchedulePage.jsx';
 import AddMedicineScheduleForm from '../pages/AddMedicineScheduleForm.jsx';
 import UserDashboard from '../pages/UserDashboard.jsx';
 import PrescriptionInput from '../pages/PrescriptionInput.jsx';
+import PatientDashboard from '../pages/patientDashboard.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<PatientRegistrationFrom />} /> {/* Registration */}
         <Route path="/login" element={<Login />} /> {/* Patient dashboard */}
         <Route path="/schedule" element={<PatientSchedulePage />} />
+        <Route path="/patientD" element={<PatientDashboard/>} /> {/* Patient dashboard */}
         <Route path="/precription" element={<PrescriptionInput />} /> {/* Patient schedule page */}
         <Route path="/userDashboard" element={<UserDashboard />} /> {/* User dashboard */}
         <Route path="/addMedicineSchedule" element={<AddMedicineScheduleForm />} /> {/* Add medicine schedule */}

@@ -1,17 +1,10 @@
-// import express from 'express';
-// const router = express.Router();
-
-// router.get('/', (req, res) => {
-//     res.send('Patient route is working');
-// });
-
-// export default router;
-
 import express from 'express';
+
 import {
   registerPatient,
   loginPatient,
-  getPatientProfile,
+  logoutPatient,
+
 } from '../controllers/patientController.js';
 import protect from '../middleware/authMiddleware.js';
 import { body } from 'express-validator';
@@ -29,7 +22,8 @@ router.post(
   registerPatient
 );
 router.post('/login', loginPatient);
-router.get('/profile', protect, getPatientProfile);
+router.post('/logout',protect,logoutPatient);
+// router.get('/profile', protect, getPatientProfile);
 // router.get('/:id/schedule',protect,getMedicineSchedule)
 
 export default router;
