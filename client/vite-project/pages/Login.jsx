@@ -37,7 +37,7 @@ function Login() {
       // Store the token (e.g., in localStorage)
       localStorage.setItem('token', response.data.token);
       toast.success("Logged in Sucessfully!")
-    navigate('/userDashboard'); // Redirect to the user dashboard or another protected route
+    navigate('/patientD'); // Redirect to the user dashboard or another protected route
    
     } catch (error) {
       console.error('Login failed:', error);

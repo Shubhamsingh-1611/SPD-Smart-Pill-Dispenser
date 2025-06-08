@@ -127,7 +127,7 @@ const logoutPatient = asyncHandler(async (req, res) => {
 //   path: '/',
 // });
 console.log("cleared cookie");
- console.log(req.cookies.jwt_token);
+//  console.log(req.cookies.jwt_token);
 
  res.clearCookie('jwt_token', {
   httpOnly: true,

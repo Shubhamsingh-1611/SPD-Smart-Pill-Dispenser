@@ -23,7 +23,6 @@ router.post(
 );
 router.post('/login', loginPatient);
 router.post('/logout',protect,logoutPatient);
-// router.get('/profile', protect, getPatientProfile);
-// router.get('/:id/schedule',protect,getMedicineSchedule)
+
 
 export default router;

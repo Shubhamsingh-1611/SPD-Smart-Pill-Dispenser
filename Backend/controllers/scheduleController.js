@@ -1,9 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import bcrypt from 'bcryptjs'; // Import bcrypt library
-import Patient from '../models/patientModel.js';
 import MedicineSchedule from '../models/MedicineSchedule.js'
-import jwt from 'jsonwebtoken';
-import { validationResult } from 'express-validator';
 
 const getSchedule = asyncHandler(async (req, res) => {
     const patientId = req.patient._id; // Assuming req.user is populated with the authenticated user's data
